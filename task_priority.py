@@ -1,4 +1,4 @@
-#Program: Task Tracker - Task Input
+#Program: Task Tracker - Task Priority
 #Authors: Saad, Emmanuel, Eddy
 #Description: Collects details from the user and displays formatted summary
 
