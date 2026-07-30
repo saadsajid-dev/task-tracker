@@ -12,12 +12,12 @@ while True:
     task_name = input("Enter Task Name (or type 'quit' to exit): ")
 
     while len(task_name) <= 0:
-        task_name = input("Error. Please try another task name: ")
+        if task_name.lower() == "quit":
+                print()
+                print("Session ended.Goodbye!")
+                break
+        task_name = input("Error. No Input Detected. Please try another task name (or type 'quit' to exit): ")
 
-    if task_name.lower() == "quit":
-        print()
-        print("Session ended.Goodbye!")
-        break
     while True:
         priority = input("Enter Task Priority (High/Medium/Low): ").lower()
         if priority == "high":
