@@ -43,10 +43,6 @@ def check_priority(priority = 'low'):
     Takes the priority as a parameter and returns a string message.
     """
 
-    if priority == "":
-        priority = 'low' # treat blank input as low priority
-    
-    priority = priority.lower()
     if priority == "high":
         return "This is a HIGH priority task."
     elif priority == "medium":
@@ -71,8 +67,11 @@ def run_tracker():
             print("Exiting Task Tracker. Goodbye!")
             break
 
-        priority = get_priority_input()
-        message = check_priority(priority)
+        priority = get_priority_input().lower()
+        if priority == "high" or priority == "medium" or priority == "low":   
+            message = check_priority(priority)
+        else:
+            message = check_priority()
 
         print(f"\nTask: {task}")
         print(message)
