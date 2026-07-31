@@ -2,12 +2,18 @@
 #Authors: Saad, Emmanuel, Eddy
 #Description: Refactored version of task_priority.py that uses functions to collect details from the user and display a formatted summary.
 
+#Global variable for our current app version
+version = '0.0.1'
+
 def greet_user():
+    #Local variable for current test run number
+    test = 'no1'
     """
     Prints a welcome message to the user.
     Takes no parameters and returns nothing.
     """
     print("Welcome to the Task Tracker")
+    print("Version:", version, "Test:", test)
 
 def get_task_input():
     """
@@ -30,7 +36,8 @@ def get_priority_input():
     priority = input("Enter Task Priority (High/Medium/Low): ")
     return priority
 
-def check_priority(priority):
+#If no parameter is passed, the default priority will be 'low'
+def check_priority(priority = 'low'):
     """
     Checks the priority level and returns a corresponding message.
     Takes the priority as a parameter and returns a string message.
