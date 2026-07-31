@@ -42,6 +42,10 @@ def check_priority(priority = 'low'):
     Checks the priority level and returns a corresponding message.
     Takes the priority as a parameter and returns a string message.
     """
+
+    if priority == "":
+        priority = 'low' # treat blank input as low priority
+    
     priority = priority.lower()
     if priority == "high":
         return "This is a HIGH priority task."
