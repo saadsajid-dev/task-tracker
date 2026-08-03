@@ -1,3 +1,4 @@
+# Global list that stores all task dictionaries created during this session
 tasks = []
 
 def add_task(name, priority, time):
@@ -39,6 +40,26 @@ def delete_task(index):
     else:
         print("Error: Invalid task number.")
 
+def get_priority():
+    """
+    Prompts the user for a priority level. Empty input defaults to "low".
+    Any input other than high, medium, or low causes a re-prompt.
+
+    Returns:
+        str: a validated priority level - high, medium, or low.
+    """
+    while True:
+        priority = input("Priority (high, medium, low) [default: low]: ").lower()
+
+        # Empty input defaults to "low"
+        if priority == "":
+            return "low"
+
+        if priority in ("high", "medium", "low"):
+            return priority
+
+        print("Error: Priority must be high, medium, or low.")
+
 def run_manager(name = 'Test', priority = 'low', time = 20):
     print("Welcome to the Task Manager!")
     print()
@@ -50,13 +71,17 @@ def run_manager(name = 'Test', priority = 'low', time = 20):
         elif user_input == "add":
             print()
             name = input("Task name: ")
-            priority = input("Priority (high, medium, low): ")
+            while len(name) == 0:
+                print("Error: Task name cannot be empty.")
+                name = input("Task name: ")
+            priority = get_priority()
             estimated_time = int(input("Estimated time in minutes: "))
 
             add_task(name, priority, estimated_time)
             print()
         elif user_input == 'view':
             view_tasks()
+            print()
         elif user_input == 'complete':
             index = int(input("Enter task number to mark complete: ")) - 1
             complete_task(index)

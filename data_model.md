@@ -1,13 +1,29 @@
-Field Name	         Data Type	        Description	         Default Value
-name                 String             Name of Task         Default
-priority             String             Priority of Task     Low
-is_complete          Boolean            Is Task complete     No
-estimated_time       Integer            Time in minutes      0
+# Task Manager - Data Model
 
-Functional Requirement	Data Field or Function	How It Is Fulfilled
+## Section 1: Task Dictionary Structure
 
+| Field Name | Data Type | Description | Default Value |
+|---|---|---|---|
+| name | String | Name/description of the task | None (must be entered by user) |
+| priority | String | Priority level of the task | Low |
+| is_complete | Boolean | Whether the task has been marked complete | False |
+| estimated_time | Integer | Estimated time to complete the task, in minutes | 0 |
 
+## Section 2: Requirements Mapping
 
+| Functional Requirement | Data Field or Function | How It Is Fulfilled |
+|---|---|---|
+| Display a main menu with add, view, complete, delete, and exit options | run_manager() | Prints the options list and accepts a command inside a while True loop |
+| After each operation, give the user the option to return to main menu or exit | run_manager() while loop | After completing add/view/complete/delete, the loop returns to the menu automatically; "quit" remains available at any time as the exit option |
+| Allow the user to add a new task by entering a task description | add_task(name, priority, estimated_time) | Builds a task dictionary from user input and appends it to the tasks list |
+| Automatically assign a status of "Pending" to every newly added task | is_complete field | Set to False by default inside add_task(), which view_tasks() displays as "Pending" |
+| Display an error message if a task is entered with no description | name validation loop in run_manager() | Re-prompts for task name while len(name) == 0, printing an error message until a non-empty value is entered |
+| Display all tasks in a numbered list showing description and status | view_tasks() | Loops through the tasks list with enumerate() and prints each task's number, name, and status |
+| Allow the user to mark a specific task as complete by its task number | complete_task(index) | Sets the is_complete field of the task at the given index to True |
+| Allow the user to delete a specific task by its task number | delete_task(index) | Removes the task at the given index from the tasks list using pop() |
+| Display an error message if an invalid task number is entered | complete_task(index), delete_task(index) | Both functions check 0 <= index < len(tasks) before acting, and print an error message if the index is out of range |
 
-Assumptions
-    -Estimated time entered is a whole number
+## Section 3: Assumptions
+
+- Tasks are stored in memory only for the duration of the program; nothing is saved once the program closes (no file or database yet).
+- Estimated time entered is always a whole number, not a decimal or text.
