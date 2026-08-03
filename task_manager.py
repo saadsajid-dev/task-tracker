@@ -1,7 +1,7 @@
 tasks = []
 
 def add_task(name, priority, time):
-    tasks.append({'name':name, 'priority':priority, 'estimated_time':time})
+    tasks.append({'name':name, 'priority':priority, 'is_complete': False, 'estimated_time':time})
     print('Task added successfully')
     print(tasks)
     return
