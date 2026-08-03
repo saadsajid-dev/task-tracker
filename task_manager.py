@@ -13,10 +13,23 @@ def add_task(name, priority, time):
 
 
 def view_tasks():
-    pass
+    """Displays all tasks in the task list."""
+    if len(tasks) == 0:
+        print("No tasks found.")
+        return
 
-def complete_task():
-    pass
+    for i, task in enumerate(tasks, start=1):
+        status = "Complete" if task["is_complete"] else "Pending"
+        print(f"{i}. {task['name']} | Priority: {task['priority']} | Status: {status} | Est. Time: {task['estimated_time']} mins")
+
+
+def complete_task(index):
+    """Marks a task as complete."""
+    if 0 <= index < len(tasks):
+        tasks[index]["is_complete"] = True
+        print(f"Task marked complete: {tasks[index]['name']}")
+    else:
+        print("Error: Invalid task number.")
 
 def delete_task(index):
     """Deletes a task from the task list."""
@@ -45,7 +58,9 @@ def run_manager(name = 'Test', priority = 'low', time = 20):
         elif user_input == 'view':
             view_tasks()
         elif user_input == 'complete':
-            complete_task()
+            index = int(input("Enter task number to mark complete: ")) - 1
+            complete_task(index)
+            print()
         elif user_input == 'delete':
             index = int(input("Enter task number to delete: ")) - 1
             delete_task(index)
