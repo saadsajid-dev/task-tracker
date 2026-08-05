@@ -1,5 +1,9 @@
+import json
+
 # Global list that stores all task dictionaries created during this session
 tasks = []
+# File used to save tasks
+TASKS_FILE = "tasks.json"
 
 def add_task(name, priority, time):
     """Add task to the task list."""
@@ -59,6 +63,32 @@ def get_priority():
             return priority
 
         print("Error: Priority must be high, medium, or low.")
+
+def save_tasks():
+    """ Saves the current task list to a JSON file. """
+    with open(TASKS_FILE, "w") as file:
+        json.dump(tasks, file, indent=4)
+
+    print("Tasks saved successfully.")
+
+def load_tasks():
+    """ Loads the task list from a JSON file. """
+    global tasks
+
+    try:
+        with open(TASKS_FILE, "r") as file:
+            tasks = json.load(file)
+
+        print(f"{len(tasks)} task(s) loaded successfully.")
+
+    except FileNotFoundError:
+        tasks = []
+        print("No saved tasks file found. Starting with an empty task list.")
+
+    except json.JSONDecodeError:
+        tasks = []
+        print("Tasks file is corrupted. Starting with an empty task list.")
+
 
 def run_manager(name = 'Test', priority = 'low', time = 20):
     print("Welcome to the Task Manager!")
