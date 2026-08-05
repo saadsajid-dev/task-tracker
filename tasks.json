@@ -2,19 +2,19 @@
     {
         "name": "deploy",
         "priority": "high",
-        "is_complete": false,
-        "estimated_time": 20
+        "estimated_time": 20,
+        "is_complete": true
     },
     {
         "name": "maintain",
         "priority": "medium",
-        "is_complete": false,
-        "estimated_time": 30
+        "estimated_time": 30,
+        "is_complete": false
     },
     {
-        "name": "deploy2",
-        "priority": "high",
-        "is_complete": false,
-        "estimated_time": 90
+        "name": "test",
+        "priority": "medium",
+        "estimated_time": 99,
+        "is_complete": false
     }
 ]
