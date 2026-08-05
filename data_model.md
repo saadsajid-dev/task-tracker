@@ -27,3 +27,7 @@
 
 - Tasks are stored in memory only for the duration of the program; nothing is saved once the program closes (no file or database yet).
 - Estimated time entered is always a whole number, not a decimal or text.
+
+## Week 2 Day 3 Update: OOP Refactor
+
+We moved away from storing each task as a plain dictionary and switched to a proper `Task` class in task.py. Now a task is an actual object with its own attributes and methods attached to it, created by calling `Task(name, priority, estimated_time)`, instead of just being a loose collection of key-value pairs. The big difference encapsulation brings is control — `priority` and `is_complete` are private now (`__priority`, `__is_complete`), so nothing outside the class can just overwrite them with garbage. You have to go through `set_priority()`, which actually checks the value first and rejects anything that isn't high, medium, or low. A dictionary could never enforce that on its own. The only catch is that `json.dump()` and `json.load()` don't know how to handle custom objects, only basic types like dicts and lists, so `to_dict()` and `from_dict()` exist purely to convert back and forth between a `Task` object and a plain dictionary whenever we're saving to or reading from the JSON file.
