@@ -90,14 +90,18 @@ def load_tasks():
         print("Tasks file is corrupted. Starting with an empty task list.")
 
 
-def run_manager(name = 'Test', priority = 'low', time = 20):
+def run_manager():
+    load_tasks()
     print("Welcome to the Task Manager!")
     print()
     while True:
-        print("Options: add | view | complete | delete | quit")
+        print("Options: add | view | complete | delete | save | quit")
         user_input = input('Choose an option: ').lower()
+
         if user_input == 'quit':
+            save_tasks()
             break
+
         elif user_input == "add":
             print()
             name = input("Task name: ")
@@ -105,21 +109,42 @@ def run_manager(name = 'Test', priority = 'low', time = 20):
                 print("Error: Task name cannot be empty.")
                 name = input("Task name: ")
             priority = get_priority()
-            estimated_time = int(input("Estimated time in minutes: "))
+
+            try:
+                estimated_time = int(input("Estimated time in minutes: "))
+            except ValueError:
+                print("Error: Estimated time must be a number.")
+                continue
 
             add_task(name, priority, estimated_time)
             print()
+
         elif user_input == 'view':
             view_tasks()
             print()
+
         elif user_input == 'complete':
-            index = int(input("Enter task number to mark complete: ")) - 1
+            try:
+                index = int(input("Enter task number to mark complete: ")) - 1
+            except ValueError:
+                print("Error: Please enter a valid task number.")
+                continue
             complete_task(index)
             print()
+            
         elif user_input == 'delete':
-            index = int(input("Enter task number to delete: ")) - 1
+            try:
+                index = int(input("Enter task number to delete: ")) - 1
+            except ValueError:
+                print("Error: Please enter a valid task number.")
+                continue
             delete_task(index)
             print()
+
+        elif user_input == 'save':
+            save_tasks()
+            print()
+
         else:
             print('Error. Invalid Input')
 
