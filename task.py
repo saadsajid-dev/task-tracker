@@ -48,3 +48,60 @@ class Task:
         """Return a string version of the task."""
         status = "Complete" if self.__is_complete else "Not Complete"
         return f"{self.name} | Priority: {self.__priority} | {status} | {self.estimated_time} hrs"
+
+
+class UrgentTask(Task):
+    """A task that is always high priority and has a deadline."""
+
+    def __init__(self, name, estimated_time, deadline):
+        """Create an urgent task with a deadline."""
+        super().__init__(name, "high", estimated_time)
+        self.deadline = deadline
+
+    def __str__(self):
+        """Return a string version of the urgent task."""
+        status = "Complete" if self.get_is_complete() else "Pending"
+        return (
+            f"[URGENT] {self.name} | "
+            f"Status: {status} | "
+            f"Est. Time: {self.estimated_time} mins | "
+            f"Deadline: {self.deadline}"
+        )
+
+    def to_dict(self):
+        """Return the urgent task as a dictionary."""
+        data = super().to_dict()
+        data["type"] = "UrgentTask"
+        data["deadline"] = self.deadline
+        return data
+
+
+class RecurringTask(Task):
+    """A task that repeats on a regular schedule."""
+
+    def __init__(self, name, priority, estimated_time, frequency):
+        """Create a recurring task with a frequency."""
+        super().__init__(name, priority, estimated_time)
+        self.frequency = frequency
+
+    def __str__(self):
+        """Return a string version of the recurring task."""
+        status = "Complete" if self.get_is_complete() else "Pending"
+        return (
+            f"[RECURRING: {self.frequency}] {self.name} | "
+            f"Priority: {self.get_priority()} | "
+            f"Status: {status} | "
+            f"Est. Time: {self.estimated_time} mins"
+        )
+
+    def reset(self):
+        """Reset the recurring task so it can be completed again."""
+        self._Task__is_complete = False
+        print(f"Recurring task reset: {self.name} ({self.frequency})")
+
+    def to_dict(self):
+        """Return the recurring task as a dictionary."""
+        data = super().to_dict()
+        data["type"] = "RecurringTask"
+        data["frequency"] = self.frequency
+        return data
