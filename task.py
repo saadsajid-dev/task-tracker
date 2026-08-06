@@ -46,8 +46,8 @@ class Task:
 
     def __str__(self):
         """Return a string version of the task."""
-        status = "Complete" if self.__is_complete else "Not Complete"
-        return f"{self.name} | Priority: {self.__priority} | {status} | {self.estimated_time} hrs"
+        status = "Complete" if self.__is_complete else "Pending"
+        return f"{self.name} | Priority: {self.__priority} | {status} | {self.estimated_time} mins"
 
 
 class UrgentTask(Task):
@@ -105,3 +105,37 @@ class RecurringTask(Task):
         data["type"] = "RecurringTask"
         data["frequency"] = self.frequency
         return data
+
+def task_from_dict(data):
+    """Create a Task object from a dictionary."""
+    task_type = data.get("type")
+
+    if task_type == "UrgentTask":
+        task = UrgentTask(data["name"], data["estimated_time"], data["deadline"])
+        if data["is_complete"]:
+            task.mark_complete()
+        return task
+
+    elif task_type == "RecurringTask":
+        task = RecurringTask(data["name"], data["priority"], data["estimated_time"], data["frequency"])
+        if data["is_complete"]:
+            task.mark_complete()
+        return task
+
+    else:
+        return Task.from_dict(data)
+
+if __name__ == "__main__":
+    demo_tasks = [
+        Task("Buy groceries", "low", 30),
+        UrgentTask("Fix server outage", 5, "2024-12-01"),
+        RecurringTask("Team standup", "medium", 15, "daily")
+    ]
+
+    print("--- Polymorphism Demo ---")
+    for task in demo_tasks:
+        print(task)
+        print("Is a Task instance:", isinstance(task, Task))
+        print()
+
+        

@@ -1,5 +1,5 @@
 import json
-from task import Task
+from task import Task, UrgentTask, RecurringTask, task_from_dict
 
 # Global list that stores all Task objects created during this session
 tasks = []
@@ -14,6 +14,55 @@ def add_task(name, priority, time):
     print(f"Task added: {name}")
 
 
+def add_urgent_task():
+    """
+    Collects a name, estimated time, and deadline from the user, creates
+    an UrgentTask object, and appends it to the global tasks list.
+    """
+    name = input("Task name: ")
+    while len(name) == 0:
+        print("Error: Task name cannot be empty.")
+        name = input("Task name: ")
+
+    try:
+        estimated_time = int(input("Estimated time in minutes: "))
+    except ValueError:
+        print("Error: Please enter a valid number for estimated time.")
+        return
+
+    deadline = input("Deadline (e.g. 2024-12-01): ")
+
+    task = UrgentTask(name, estimated_time, deadline)
+    tasks.append(task)
+    print(f"Urgent task added: {name}")
+
+
+def add_recurring_task():
+    """
+    Collects a name, priority, estimated time, and frequency from the
+    user, creates a RecurringTask object, and appends it to the global
+    tasks list.
+    """
+    name = input("Task name: ")
+    while len(name) == 0:
+        print("Error: Task name cannot be empty.")
+        name = input("Task name: ")
+
+    priority = prompt_priority()
+
+    try:
+        estimated_time = int(input("Estimated time in minutes: "))
+    except ValueError:
+        print("Error: Please enter a valid number for estimated time.")
+        return
+
+    frequency = input("Frequency (e.g. daily, weekly): ")
+
+    task = RecurringTask(name, priority, estimated_time, frequency)
+    tasks.append(task)
+    print(f"Recurring task added: {name}")
+
+
 def view_tasks():
     """Displays all tasks in the task list."""
     if len(tasks) == 0:
@@ -21,8 +70,7 @@ def view_tasks():
         return
 
     for i, task in enumerate(tasks, start=1):
-        status = "Complete" if task.get_is_complete() else "Pending"
-        print(f"{i}. {task.name} | Priority: {task.get_priority()} | Status: {status} | Est. Time: {task.estimated_time} mins")
+        print(f"{i}. {task}")
 
 
 def complete_task(index):
@@ -73,12 +121,12 @@ def save_tasks():
 
 
 def load_tasks():
-    """ Loads the task list from a JSON file, rebuilding Task objects with from_dict(). """
+    """ Loads the task list from a JSON file, rebuilding the correct task type with task_from_dict(). """
     global tasks
 
     try:
         with open(TASKS_FILE, "r") as file:
-            tasks = [Task.from_dict(t) for t in json.load(file)]
+            tasks = [task_from_dict(t) for t in json.load(file)]
 
         print(f"{len(tasks)} task(s) loaded successfully.")
 
@@ -94,14 +142,14 @@ def load_tasks():
 def run_manager():
     """
     Runs the main Task Manager loop. Loads any saved tasks, greets the
-    user, then repeatedly accepts add/view/complete/delete/save/quit
-    commands. Saves tasks automatically on quit.
+    user, then repeatedly accepts add/add-urgent/add-recurring/view/
+    complete/delete/save/quit commands. Saves tasks automatically on quit.
     """
     load_tasks()
     print("Welcome to the Task Manager!")
     print()
     while True:
-        print("Options: add | view | complete | delete | save | quit")
+        print("Options: add | add-urgent | add-recurring | view | complete | delete | save | quit")
         user_input = input('Choose an option: ').lower()
 
         if user_input == 'quit':
@@ -123,6 +171,16 @@ def run_manager():
                 continue
 
             add_task(name, priority, estimated_time)
+            print()
+
+        elif user_input == 'add-urgent':
+            print()
+            add_urgent_task()
+            print()
+
+        elif user_input == 'add-recurring':
+            print()
+            add_recurring_task()
             print()
 
         elif user_input == 'view':

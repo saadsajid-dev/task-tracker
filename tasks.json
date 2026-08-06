@@ -16,5 +16,41 @@
         "priority": "medium",
         "estimated_time": 99,
         "is_complete": false
+    },
+    {
+        "name": "interview",
+        "priority": "high",
+        "estimated_time": 90,
+        "is_complete": false,
+        "type": "UrgentTask",
+        "deadline": "2026-08-08"
+    },
+    {
+        "name": "class",
+        "priority": "medium",
+        "estimated_time": 60,
+        "is_complete": false,
+        "type": "RecurringTask",
+        "frequency": "weekly"
+    },
+    {
+        "name": "groceries",
+        "priority": "low",
+        "estimated_time": 45,
+        "is_complete": false
+    },
+    {
+        "name": "school",
+        "priority": "low",
+        "estimated_time": 90,
+        "is_complete": false
+    },
+    {
+        "name": "play music",
+        "priority": "high",
+        "estimated_time": 23,
+        "is_complete": false,
+        "type": "UrgentTask",
+        "deadline": "2024-08-09"
     }
 ]
