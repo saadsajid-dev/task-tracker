@@ -13,7 +13,7 @@ while True:
     task_name = input("Enter Task Name (or type 'quit' to exit): ")
     if task_name.lower() == "quit":
         print()
-        print("Session ended.Goodbye!")
+        print("Session ended. Goodbye!")
         break
 
     # Comparison operator to check if the task name is not empty    

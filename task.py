@@ -47,7 +47,7 @@ class Task:
     def __str__(self):
         """Return a string version of the task."""
         status = "Complete" if self.__is_complete else "Pending"
-        return f"{self.name} | Priority: {self.__priority} | {status} | {self.estimated_time} mins"
+        return f"{self.name} | Priority: {self.__priority} | Status: {status} | {self.estimated_time} mins"
 
 
 class UrgentTask(Task):
