@@ -1,0 +1,37 @@
+test_recurring_str_contains_label (test_task.TestRecurringTask.test_recurring_str_contains_label)
+Verify recurring task output contains the RECURRING label. ... ok
+test_recurring_to_dict_includes_type (test_task.TestRecurringTask.test_recurring_to_dict_includes_type)
+Verify recurring task dictionary includes its type and frequency. ... ok
+test_reset (test_task.TestRecurringTask.test_reset)
+Verify reset changes a completed recurring task back to incomplete. ... Recurring task reset: Team standup (daily)
+ok
+test_from_dict (test_task.TestTask.test_from_dict)
+Verify Task.from_dict recreates a Task correctly. ... ok
+test_mark_complete (test_task.TestTask.test_mark_complete)
+Verify mark_complete sets the task to complete. ... ok
+test_set_priority_invalid (test_task.TestTask.test_set_priority_invalid)
+Verify an invalid priority does not change the priority. ... Invalid priority.
+ok
+test_set_priority_valid (test_task.TestTask.test_set_priority_valid)
+Verify a valid priority updates correctly. ... ok
+test_str_output (test_task.TestTask.test_str_output)
+Verify string output contains the task name and Pending. ... ok
+test_task_creation (test_task.TestTask.test_task_creation)
+Verify a task is created with the correct values. ... ok
+test_task_default_incomplete (test_task.TestTask.test_task_default_incomplete)
+Verify a new task starts as incomplete. ... ok
+test_to_dict (test_task.TestTask.test_to_dict)
+Verify to_dict returns the correct task data. ... ok
+test_urgent_priority_is_always_high (test_task.TestUrgentTask.test_urgent_priority_is_always_high)
+Verify an urgent task starts with high priority. ... ok
+test_urgent_str_contains_deadline (test_task.TestUrgentTask.test_urgent_str_contains_deadline)
+Verify urgent task output contains its deadline. ... ok
+test_urgent_str_contains_label (test_task.TestUrgentTask.test_urgent_str_contains_label)
+Verify urgent task output contains the URGENT label. ... ok
+test_urgent_to_dict_includes_type (test_task.TestUrgentTask.test_urgent_to_dict_includes_type)
+Verify urgent task dictionary includes its type and deadline. ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.000s
+
+OK
