@@ -60,6 +60,8 @@ Task Tracker is a command-line Python application that helps users manage their 
 - **test_task.py** — Unit tests for `Task`, `UrgentTask`, and `RecurringTask` using Python's `unittest` framework.
 - **test_cases.md** — Manual test cases created during Week 1.
 - **test_results.txt** — Output from running the unit tests.
+- **code_review.md** — Self-review covering code quality, correctness, and edge cases, plus the release readiness checklist.
+- **bug_report.md** — Documents two known bugs found during the self-review, including steps to reproduce.
 
 ---
 
